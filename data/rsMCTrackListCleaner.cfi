@@ -10,7 +10,6 @@
 ## 
 ## sequence dependency:
 ##
-## - ctfWithMaterialTracks: include "RecoTracker/TrackProducer/data/CTFFinalFitWithMaterial.cff"
 ## - rsWithMaterialTracks: include "RecoTracker/TrackProducer/data/RSFinalFitWithMaterial.cff"
 ##
 ##
@@ -24,13 +23,13 @@
 ##
 ## cleans and merges ctf and rs Track lists and put new list back in Event
 
-module ctfrsTrackListMerger = SimpleTrackListMerger 
+module rsMCTrackListCleaner = SimpleTrackListMerger 
 {
 
-  # module laber of CTF Tracks from KF with material propagator
-  string TrackProducer1 = "ctfWithMaterialTracks"
   # module laber of RS Tracks from KF with material propagator
-  string TrackProducer2 = "rsWithMaterialTracks"
+  string TrackProducer1 = "rsWithMaterialTracks"
+  # will only clean TrackProducer1 if TrackProducer2 doesn't exist
+  string TrackProducer2 = "IgnoreThisWarning"
   # maximum chisq/dof
   double MaxNormalizedChisq = 20.0
   # minimum number of RecHits used in fit

@@ -24,7 +24,7 @@
 ##
 ## cleans and merges ctf and rs Track lists and put new list back in Event
 
-module ctfrsTrackListMerger = SimpleTrackListMerger 
+module ctfrsMCTrackListMerger = SimpleTrackListMerger 
 {
 
   # module laber of CTF Tracks from KF with material propagator

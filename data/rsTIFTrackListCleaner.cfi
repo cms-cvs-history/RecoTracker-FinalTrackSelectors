@@ -10,7 +10,7 @@
 ## 
 ## sequence dependency:
 ##
-## - ctfWithMaterialTracks: include "RecoTracker/TrackProducer/data/CTFFinalFitWithMaterial.cff"
+## - rsWithMaterialTracks: include "RecoTracker/TrackProducer/data/RSFinalFitWithMaterial.cff"
 ##
 ##
 ## service dependency:
@@ -26,8 +26,9 @@
 module rsTIFTrackListCleaner = SimpleTrackListMerger 
 {
 
-  # module laber of CTF Tracks from KF with material propagator
+  # module laber of RS Tracks from KF with material propagator
   string TrackProducer1 = "rsWithMaterialTracksTIF"
+  # will only clean TrackProducer1 if TrackProducer2 doesn't exist
   string TrackProducer2 = "IgnoreThisWarning"
   # maximum chisq/dof
   double MaxNormalizedChisq = 100.0

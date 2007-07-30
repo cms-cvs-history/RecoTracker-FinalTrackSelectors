@@ -28,6 +28,7 @@ module ctfTIFTrackListCleaner = SimpleTrackListMerger
 
   # module laber of CTF Tracks from KF with material propagator
   string TrackProducer1 = "ctfWithMaterialTracksTIF"
+  # will only clean TrackProducer1 if TrackProducer2 doesn't exist
   string TrackProducer2 = "IgnoreThisWarning"
   # maximum chisq/dof
   double MaxNormalizedChisq = 100.0

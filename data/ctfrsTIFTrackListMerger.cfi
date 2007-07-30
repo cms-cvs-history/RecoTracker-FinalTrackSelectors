@@ -11,6 +11,7 @@
 ## sequence dependency:
 ##
 ## - ctfWithMaterialTracks: include "RecoTracker/TrackProducer/data/CTFFinalFitWithMaterial.cff"
+## - rsWithMaterialTracks: include "RecoTracker/TrackProducer/data/RSFinalFitWithMaterial.cff"
 ##
 ##
 ## service dependency:
@@ -28,6 +29,7 @@ module ctfrsTIFTrackListMerger = SimpleTrackListMerger
 
   # module laber of CTF Tracks from KF with material propagator
   string TrackProducer1 = "ctfWithMaterialTracksTIF"
+  # module laber of RS Tracks from KF with material propagator
   string TrackProducer2 = "rsWithMaterialTracksTIF"
   # maximum chisq/dof
   double MaxNormalizedChisq = 100.0
