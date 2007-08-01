@@ -37,7 +37,8 @@ module ctfMCTrackListCleaner = SimpleTrackListMerger
   # minimum pT in GeV/c
   double MinPT = 0.050
   # minimum difference in rechit position in cm
-  double Epsilon = 0.001
+  # negative Epsilon uses sharedInput for comparison
+  double Epsilon = -0.001
   # minimum shared fraction to be called duplicate
   double ShareFrac = 0.66
 
