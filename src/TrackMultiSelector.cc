@@ -11,9 +11,7 @@ TrackMultiSelector::Block::Block(const edm::ParameterSet & cfg) :
     lhits(p2p<uint32_t>(cfg,"lostHits")),
     chi2n(p2p<double>(cfg,"chi2n")), 
     d0(cfg.getParameter<double>("d0")),
-    dz(cfg.getParameter<double>("dz")),
-    d0Rel(cfg.getParameter<double>("d0Rel")),
-    dzRel(cfg.getParameter<double>("dzRel"))
+    dz(cfg.getParameter<double>("dz"))
 {
 }
 
@@ -186,17 +184,14 @@ void TrackMultiSelector::produce( edm::Event& evt, const edm::EventSetup& es )
     }
 }
 
-inline bool  TrackMultiSelector::testVtx ( const Point &pca,double d0Err,double dzErr,
-					   const std::vector<Point> &points,
-					   const TrackMultiSelector::Block &cut) {
+inline bool  TrackMultiSelector::testVtx ( const Point &pca, const std::vector<Point> &points, const TrackMultiSelector::Block &cut) {
     using std::abs;
     if (points.empty()) { 
         return ( (abs(pca.z()) < 15.9) && (pca.Rho() < 0.2) );
     }
     for (std::vector<Point>::const_iterator point = points.begin(), end = points.end(); point != end; ++point) {
         math::XYZVector d = *point - pca;
-        if ((fabs(d.z()) < cut.dz) && (d.Rho() < cut.d0) 
-	    && fabs(d.z()/std::max(dzErr,1e-9)) < cut.dzRel && (d.Rho()/std::max(d0Err,1e-8) < cut.d0Rel )) return true;
+        if ((abs(d.z()) < cut.dz) && (d.Rho() < cut.d0)) return true;
     }
     return false;
 }
@@ -211,8 +206,7 @@ short TrackMultiSelector::select(const reco::Track &tk, const std::vector<Point>
              ( itb->chi2n.first <= chi2n ) && ( chi2n <= itb->chi2n.second ) &&
              ( itb->pt.first    <= pt    ) && ( pt    <= itb->pt.second    ) &&
              ( itb->lhits.first <= lhits ) && ( lhits <= itb->lhits.second ) &&
-             testVtx(pca,tk.d0Error(),tk.dzError(),
-		     points, *itb) ) 
+             testVtx(pca, points, *itb) ) 
         {
             return which;
         }
