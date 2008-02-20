@@ -6,6 +6,12 @@
      uint32   vtxTracks   = 3     // at least 3 tracks
      double   vtxChi2Prob = 0.01  // at least 1% chi2nprobability (if it has a chi2)
 
+     PSet beamspot = { // same as RecoTracker/TkTrackingRegions/data/GlobalTrackingRegionFromBeamSpot.cfi
+            InputTag src = offlineBeamSpot
+            double   dzSigmas  = 3.0   // z window relative to the interaction point spread (given by the beamSpot)
+            double   d0        = 0.2
+     }
+
      VPSet cutSets = {
         {  // we want to keep all the tracks with many hits
            vuint32 validHits = { 10  , 999999 }
