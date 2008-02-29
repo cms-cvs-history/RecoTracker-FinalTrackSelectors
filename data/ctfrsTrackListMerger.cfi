@@ -28,13 +28,14 @@ module ctfrsTrackListMerger = SimpleTrackListMerger
 {
 
   # module laber of CTF Tracks from KF with material propagator
-  string TrackProducer1 = "ctfWithMaterialTracks"
+  #string TrackProducer1 = "ctfWithMaterialTracks"
+  string TrackProducer1 = "generalTracks"
   # module laber of RS Tracks from KF with material propagator
   string TrackProducer2 = "rsWithMaterialTracks"
   # maximum chisq/dof
-  double MaxNormalizedChisq = 20.0
+  double MaxNormalizedChisq = 1000.0
   # minimum number of RecHits used in fit
-  int32 MinFound = 8
+  int32 MinFound = 3
   # minimum pT in GeV/c
   double MinPT = 0.050
   # minimum difference in rechit position in cm
