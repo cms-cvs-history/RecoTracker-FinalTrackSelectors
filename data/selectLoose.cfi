@@ -1,0 +1,22 @@
+  module selectLoose = AnalyticalTrackSelector {
+     InputTag src      = generalTracks
+
+     InputTag beamspot    = offlineBeamSpot
+     InputTag vertices    = pixelVertices
+     int32    vtxNumber   = -1
+     uint32   vtxTracks   = 3     // at least 3 tracks
+     double   vtxChi2Prob = 0.01  // at least 1% chi2nprobability (if it has a chi2)
+// parameters for cuts: loose
+     double chi2n_par = 2.0
+     vdouble d0_par1 = { 0.55, 4. }
+     vdouble dz_par1 = { 0.65, 4. }
+     vdouble d0_par2 = { 0.55, 4. }
+     vdouble dz_par2 = { 0.45, 4. }
+
+
+     untracked bool copyExtras       = true  // set to false on AOD
+    //untracked bool copyTrajectories = true // when doing retracking before
+    untracked bool copyTrajectories = false  // when not doing retracking
+    uint32 minNumberLayers =0
+  }
+
