@@ -17,6 +17,6 @@
      untracked bool copyExtras       = true  // set to false on AOD
     //untracked bool copyTrajectories = true // when doing retracking before
     untracked bool copyTrajectories = false  // when not doing retracking
-    uint32 minNumberHits =0
+    uint32 minNumberLayers =0
   }
 
