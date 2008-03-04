@@ -14,7 +14,7 @@
 
      VPSet cutSets = {
         {  // we want to keep all the tracks with many hits
-           vuint32 validHits = { 10  , 999999 }
+           vuint32 validLayers = { 10  , 999999 }
            vuint32 lostHits  = { 0  , 999999 }
            vdouble chi2n     = { 0  , 999999 }
            vdouble pt        = { 0.3, 999999 }
@@ -23,7 +23,7 @@
            double d0Rel      = 9999
            double dzRel      = 9999},
         {  // less hits but vertex association
-           vuint32 validHits = { 8  , 9      }
+           vuint32 validLayers = { 8  , 9      }
            vuint32 lostHits  = { 0  , 999999 }
            vdouble chi2n     = { 0  , 999999 }
            vdouble pt        = { 0.3, 999999 }
@@ -32,7 +32,7 @@
            double d0Rel      = 10
            double dzRel      = 10},
         {  // less hits but vertex association
-           vuint32 validHits = { 5  , 7      }
+           vuint32 validLayers = { 5  , 7      }
            vuint32 lostHits  = { 0  , 999999 }
            vdouble chi2n     = { 0  , 999999 }
            vdouble pt        = { 0.3, 999999 }
@@ -41,7 +41,7 @@
            double d0Rel      = 7
            double dzRel      = 7},
         {  // even less hits, but decent track
-           vuint32 validHits = { 3  , 4      }
+           vuint32 validLayers = { 3  , 4      }
            vuint32 lostHits  = { 0  , 0      }
            vdouble chi2n     = { 0  , 100    }
            vdouble pt        = { 0.3, 999999 }
