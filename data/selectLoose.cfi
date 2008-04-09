@@ -6,6 +6,8 @@
      int32    vtxNumber   = -1
      uint32   vtxTracks   = 3     // at least 3 tracks
      double   vtxChi2Prob = 0.01  // at least 1% chi2nprobability (if it has a chi2)
+// resolution parameters: normal 
+     vdouble res_par = {0.003, 0.01}
 // parameters for cuts: loose
      double chi2n_par = 2.0
      vdouble d0_par1 = { 0.55, 4. }
