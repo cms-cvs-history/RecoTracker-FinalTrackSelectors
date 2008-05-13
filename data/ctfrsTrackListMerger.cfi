@@ -44,4 +44,9 @@ module ctfrsTrackListMerger = SimpleTrackListMerger
   # minimum shared fraction to be called duplicate
   double ShareFrac = 0.66
 
+  # set new quality for confirmed tracks
+  bool promoteTrackQuality = false
+  # new quality setting
+  string newQuality = "looseWithConfirm"
+
 }

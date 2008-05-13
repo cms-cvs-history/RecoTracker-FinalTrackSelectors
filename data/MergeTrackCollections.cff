@@ -6,5 +6,6 @@
 module  generalTracks = ctfrsTrackListMerger from "RecoTracker/FinalTrackSelectors/data/ctfrsTrackListMerger.cfi"
 replace generalTracks.TrackProducer1   = firstStepTracksWithQuality
 replace generalTracks.TrackProducer2   = secStep
+replace generalTracks.promoteTrackQuality = true
 
 sequence trackCollectionMerging = { generalTracks }
