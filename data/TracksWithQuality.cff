@@ -4,7 +4,7 @@
   //   sequence: tracksWithQuality
 
   module  withLooseQuality = selectLoose from "RecoTracker/FinalTrackSelectors/data/selectLoose.cfi"
-  replace withLooseQuality.src              = preFilterCmsTracks
+  replace withLooseQuality.src              = preFilterFirstStepTracks
   replace withLooseQuality.keepAllTracks    = false // we only keep hthose who pass the filter
   replace withLooseQuality.copyExtras       = true
   replace withLooseQuality.copyTrajectories = true
@@ -15,10 +15,10 @@
   replace withTightQuality.copyExtras       = true
   replace withTightQuality.copyTrajectories = true
 
-  module  generalTracks = selectHighPurity from "RecoTracker/FinalTrackSelectors/data/selectHighPurity.cfi"
-  replace generalTracks.src              = withTightQuality
-  replace generalTracks.keepAllTracks    = true
-  replace generalTracks.copyExtras       = true
-  replace generalTracks.copyTrajectories = true
+  module  firstStepTracksWithQuality = selectHighPurity from "RecoTracker/FinalTrackSelectors/data/selectHighPurity.cfi"
+  replace firstStepTracksWithQuality.src              = withTightQuality
+  replace firstStepTracksWithQuality.keepAllTracks    = true
+  replace firstStepTracksWithQuality.copyExtras       = true
+  replace firstStepTracksWithQuality.copyTrajectories = true
 
-  sequence tracksWithQuality = { withLooseQuality, withTightQuality, generalTracks }
+  sequence tracksWithQuality = { withLooseQuality, withTightQuality, firstStepTracksWithQuality }
