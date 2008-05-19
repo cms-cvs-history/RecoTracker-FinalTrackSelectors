@@ -47,6 +47,6 @@ module ctfrsTrackListMerger = SimpleTrackListMerger
   # set new quality for confirmed tracks
   bool promoteTrackQuality = false
   # new quality setting
-  string newQuality = "looseWithConfirm"
+  string newQuality = "confirmed"
 
 }
