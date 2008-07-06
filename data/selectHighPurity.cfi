@@ -6,8 +6,8 @@
      int32    vtxNumber   = -1
      uint32   vtxTracks   = 3     // at least 3 tracks
      double   vtxChi2Prob = 0.01  // at least 1% chi2nprobability (if it has a chi2)
-// resolution parameters: normal 
-     vdouble res_par = {0.003, 0.01}
+// resolution parameters: tighter 
+      vdouble res_par = {0.003, 0.001}
 // parameters for cuts: tight 
      double chi2n_par = 0.9 
      vdouble d0_par1 = { 0.30, 4. }
@@ -19,7 +19,7 @@
      untracked bool copyExtras       = true  // set to false on AOD
     //untracked bool copyTrajectories = true // when doing retracking before
     untracked bool copyTrajectories = false  // when not doing retracking
-    uint32 minNumberLayers =5
+    uint32 minNumberLayers =0
 
     bool   keepAllTracks = false // if set to true tracks failing this filter are kept in the output
     string qualityBit    = "highPurity" // set to '' or comment out if you don't want to set the bit
