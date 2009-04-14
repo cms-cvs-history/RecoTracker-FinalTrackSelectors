@@ -1,0 +1,52 @@
+##
+## ctf tracks parameter-set entries for module
+##
+## SimpleTrackListMerger
+##
+## located in
+##
+## RecoTracker/FinalTrackSelectors
+##
+## 
+## sequence dependency:
+##
+## - ctfWithMaterialTracks: include "RecoTracker/TrackProducer/data/CTFFinalFitWithMaterial.cff"
+## - rsWithMaterialTracks: include "RecoTracker/TrackProducer/data/RSFinalFitWithMaterial.cff"
+##
+##
+## service dependency:
+##
+## - geometry:          include "Geometry/CMSCommonData/data/cmsIdealGeometryXML.cfi"
+## - tracker geometry:  include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+## - tracker numbering: include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
+##
+## function:
+##
+## cleans and merges ctf and rs Track lists and put new list back in Event
+
+module ctfrsTrackListMerger = SimpleTrackListMerger 
+{
+
+  # module laber of CTF Tracks from KF with material propagator
+  #string TrackProducer1 = "ctfWithMaterialTracks"
+  string TrackProducer1 = "generalTracks"
+  # module laber of RS Tracks from KF with material propagator
+  string TrackProducer2 = "rsWithMaterialTracks"
+  # maximum chisq/dof
+  double MaxNormalizedChisq = 1000.0
+  # minimum number of RecHits used in fit
+  int32 MinFound = 3
+  # minimum pT in GeV/c
+  double MinPT = 0.050
+  # minimum difference in rechit position in cm
+  # negative Epsilon uses sharedInput for comparison
+  double Epsilon = -0.001
+  # minimum shared fraction to be called duplicate
+  double ShareFrac = 0.66
+
+  # set new quality for confirmed tracks
+  bool promoteTrackQuality = false
+  # new quality setting
+  string newQuality = "confirmed"
+
+}

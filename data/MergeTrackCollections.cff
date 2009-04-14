@@ -1,0 +1,16 @@
+// Track filtering and quality.
+//   input:    firstStepTracksWithQuality,secStep,thStep
+//   output:   generalTracks
+//   sequence: trackCollectionMerging
+
+module  mergeFirstTwoSteps = ctfrsTrackListMerger from "RecoTracker/FinalTrackSelectors/data/ctfrsTrackListMerger.cfi"
+replace mergeFirstTwoSteps.TrackProducer1   = firstStepTracksWithQuality
+replace mergeFirstTwoSteps.TrackProducer2   = secStep
+replace mergeFirstTwoSteps.promoteTrackQuality = true
+
+module  generalTracks = ctfrsTrackListMerger from "RecoTracker/FinalTrackSelectors/data/ctfrsTrackListMerger.cfi"
+replace generalTracks.TrackProducer1   = mergeFirstTwoSteps
+replace generalTracks.TrackProducer2   = thStep
+replace generalTracks.promoteTrackQuality = true
+
+sequence trackCollectionMerging = { mergeFirstTwoSteps, generalTracks }
