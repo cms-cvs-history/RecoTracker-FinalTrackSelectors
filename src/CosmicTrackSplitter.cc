@@ -260,6 +260,7 @@ namespace reco { namespace modules {
 			LogDebug("CosmicTrackSplitter") << "ntracks: " << tracks->size();
 			
 			// try to find distance of closest approach
+			math::XYZPoint refPoint = itt->referencePoint();
 			GlobalPoint v( itt->vx(), itt->vy(), itt->vz() );
 			
 			//checks on impact parameter
@@ -386,29 +387,29 @@ namespace reco { namespace modules {
 		
 		LogDebug("CosmicTrackSplitter") << "Making a candidate!";
 		
-		
+		TrajectoryStateTransform transform;
 		PropagationDirection   pdir = tk.seedDirection();
-		PTrajectoryStateOnDet state;
+		PTrajectoryStateOnDet *state;
 		if ( pdir == anyDirection ) throw cms::Exception("UnimplementedFeature") << "Cannot work with tracks that have 'anyDirecton' \n";
 		//if ( (pdir == alongMomentum) == ( tk.p() >= tk.outerP() ) ) {
 		if ( (pdir == alongMomentum) == (  (tk.outerPosition()-tk.innerPosition()).Dot(tk.momentum()) >= 0    ) ) {
 			// use inner state
-			TrajectoryStateOnSurface originalTsosIn(trajectoryStateTransform::innerStateOnSurface(tk, *theGeometry, &*theMagField));
-			state = trajectoryStateTransform::persistentState( originalTsosIn, DetId(tk.innerDetId()) );
+			TrajectoryStateOnSurface originalTsosIn(transform.innerStateOnSurface(tk, *theGeometry, &*theMagField));
+			state = transform.persistentState( originalTsosIn, DetId(tk.innerDetId()) );
 		} else { 
 			// use outer state
-			TrajectoryStateOnSurface originalTsosOut(trajectoryStateTransform::outerStateOnSurface(tk, *theGeometry, &*theMagField));
-			state = trajectoryStateTransform::persistentState( originalTsosOut, DetId(tk.outerDetId()) );
+			TrajectoryStateOnSurface originalTsosOut(transform.outerStateOnSurface(tk, *theGeometry, &*theMagField));
+			state = transform.persistentState( originalTsosOut, DetId(tk.outerDetId()) );
 		}
 		
-		TrajectorySeed seed(state, TrackCandidate::RecHitContainer(), pdir);
+		TrajectorySeed seed(*state, TrackCandidate::RecHitContainer(), pdir);
 		
 		TrackCandidate::RecHitContainer ownHits;
 		ownHits.reserve(hitsEnd - hitsBegin);
 		for ( ; hitsBegin != hitsEnd; ++hitsBegin) { ownHits.push_back( *hitsBegin ); }
 		
-		TrackCandidate cand(ownHits, seed, state, tk.seedRef());
-		
+		TrackCandidate cand(ownHits, seed, *state, tk.seedRef());
+		delete state;
 		
 		LogDebug("CosmicTrackSplitter") << "   dumping the hits now: ";
 		for (TrackCandidate::range hitR = cand.recHits(); hitR.first != hitR.second; ++hitR.first) {
