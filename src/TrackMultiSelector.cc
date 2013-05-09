@@ -140,8 +140,14 @@ void TrackMultiSelector::produce( edm::Event& evt, const edm::EventSetup& es )
         if (!copyExtras_) continue;
 
         // TrackExtras
-        selTrackExtras_[where]->push_back( TrackExtra( trk.outerPosition(), trk.outerMomentum(), trk.outerOk(),
-                    trk.innerPosition(), trk.innerMomentum(), trk.innerOk(),
+        // Use reduced format (AA)
+//        selTrackExtras_[where]->push_back( TrackExtra( trk.outerPosition(), trk.outerMomentum(), trk.outerOk(),
+//                    trk.innerPosition(), trk.innerMomentum(), trk.innerOk(),
+//                    trk.outerStateCovariance(), trk.outerDetId(),
+//                    trk.innerStateCovariance(), trk.innerDetId(),
+//                    trk.seedDirection(), trk.seedRef() ) );
+        selTrackExtras_[where]->push_back( TrackExtra( trk.outerOk(),
+                    trk.innerOk(),
                     trk.outerStateCovariance(), trk.outerDetId(),
                     trk.innerStateCovariance(), trk.innerDetId(),
                     trk.seedDirection(), trk.seedRef() ) );

@@ -7,9 +7,9 @@
 // Original Author: Steve Wagner, stevew@pizero.colorado.edu
 // Created:         Sat Jan 14 22:00:00 UTC 2006
 //
-// $Author: innocent $
-// $Date: 2012/01/17 15:33:54 $
-// $Revision: 1.28 $
+// $Author: stenson $
+// $Date: 2012/02/19 20:21:34 $
+// $Revision: 1.29 $
 //
 
 #include <memory>
@@ -418,9 +418,16 @@ namespace cms
 	  }//creating a new seed and rekeying it rechit clusters.
 	  //--------NEW----------
           // Fill TrackExtra collection
-	  outputTrkExtras->push_back( reco::TrackExtra( 
-                        theTrack.outerPosition(), theTrack.outerMomentum(), theTrack.outerOk(),
-                        theTrack.innerPosition(), theTrack.innerMomentum(), theTrack.innerOk(),
+          // Use reduced format (AA)
+//    outputTrkExtras->push_back( reco::TrackExtra( 
+//                        theTrack.outerPosition(), theTrack.outerMomentum(), theTrack.outerOk(),
+//                        theTrack.innerPosition(), theTrack.innerMomentum(), theTrack.innerOk(),
+//                        theTrack.outerStateCovariance(), theTrack.outerDetId(),
+//                        theTrack.innerStateCovariance(), theTrack.innerDetId(),
+//                        theTrack.seedDirection(), origSeedRef ) );
+    outputTrkExtras->push_back( reco::TrackExtra( 
+                        theTrack.outerOk(),
+                        theTrack.innerOk(),
                         theTrack.outerStateCovariance(), theTrack.outerDetId(),
                         theTrack.innerStateCovariance(), theTrack.innerDetId(),
                         theTrack.seedDirection(), origSeedRef ) );
@@ -536,9 +543,16 @@ namespace cms
 	  }//creating a new seed and rekeying it rechit clusters.
 	  //--------NEW----------
           // Fill TrackExtra collection
+          // Use reduced extra format (AA)
+//          outputTrkExtras->push_back( reco::TrackExtra( 
+//                        theTrack.outerPosition(), theTrack.outerMomentum(), theTrack.outerOk(),
+//                        theTrack.innerPosition(), theTrack.innerMomentum(), theTrack.innerOk(),
+//                        theTrack.outerStateCovariance(), theTrack.outerDetId(),
+//                        theTrack.innerStateCovariance(), theTrack.innerDetId(),
+//                        theTrack.seedDirection(), origSeedRef ) );
           outputTrkExtras->push_back( reco::TrackExtra( 
-                        theTrack.outerPosition(), theTrack.outerMomentum(), theTrack.outerOk(),
-                        theTrack.innerPosition(), theTrack.innerMomentum(), theTrack.innerOk(),
+                        theTrack.outerOk(),
+                        theTrack.innerOk(),
                         theTrack.outerStateCovariance(), theTrack.outerDetId(),
                         theTrack.innerStateCovariance(), theTrack.innerDetId(),
                         theTrack.seedDirection(), origSeedRef ) );

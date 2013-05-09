@@ -602,12 +602,19 @@ namespace cms
 	}//creating a new seed and rekeying it rechit clusters.
 	
 	// Fill TrackExtra collection
-	outputTrkExtras->push_back( reco::TrackExtra( 
-						     track->outerPosition(), track->outerMomentum(), track->outerOk(),
-						     track->innerPosition(), track->innerMomentum(), track->innerOk(),
-						     track->outerStateCovariance(), track->outerDetId(),
-						     track->innerStateCovariance(), track->innerDetId(),
-						     track->seedDirection(), origSeedRef ) );
+ // Use reduced format (AA) 
+//  outputTrkExtras->push_back( reco::TrackExtra( 
+//                 track->outerPosition(), track->outerMomentum(), track->outerOk(),
+//                 track->innerPosition(), track->innerMomentum(), track->innerOk(),
+//                 track->outerStateCovariance(), track->outerDetId(),
+//                 track->innerStateCovariance(), track->innerDetId(),
+//                 track->seedDirection(), origSeedRef ) );
+  outputTrkExtras->push_back( reco::TrackExtra( 
+                 track->outerOk(),
+                 track->innerOk(),
+                 track->outerStateCovariance(), track->outerDetId(),
+                 track->innerStateCovariance(), track->innerDetId(),
+                 track->seedDirection(), origSeedRef ) );
 	seedsRefs[i]=origSeedRef;
 	outputTrks->back().setExtra( reco::TrackExtraRef( refTrkExtras, outputTrkExtras->size() - 1) );
 	reco::TrackExtra & tx = outputTrkExtras->back();

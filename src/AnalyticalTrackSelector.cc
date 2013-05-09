@@ -203,11 +203,18 @@ void AnalyticalTrackSelector::produce( edm::Event& evt, const edm::EventSetup& e
     }
     if (copyExtras_) {
       // TrackExtras
-      selTrackExtras_->push_back( TrackExtra( trk.outerPosition(), trk.outerMomentum(), trk.outerOk(),
-					      trk.innerPosition(), trk.innerMomentum(), trk.innerOk(),
-					      trk.outerStateCovariance(), trk.outerDetId(),
-					      trk.innerStateCovariance(), trk.innerDetId(),
-					      trk.seedDirection(), trk.seedRef() ) );
+      // Use reduced extra format (AA) 
+//      selTrackExtras_->push_back( TrackExtra( trk.outerPosition(), trk.outerMomentum(), trk.outerOk(),
+//                trk.innerPosition(), trk.innerMomentum(), trk.innerOk(),
+//                trk.outerStateCovariance(), trk.outerDetId(),
+//                trk.innerStateCovariance(), trk.innerDetId(),
+//                trk.seedDirection(), trk.seedRef() ) );
+      selTrackExtras_->push_back( TrackExtra( trk.outerOk(),
+                trk.innerOk(),
+                trk.outerStateCovariance(), trk.outerDetId(),
+                trk.innerStateCovariance(), trk.innerDetId(),
+                trk.seedDirection(), trk.seedRef() ) );
+                
       selTracks_->back().setExtra( TrackExtraRef( rTrackExtras_, selTrackExtras_->size() - 1) );
       TrackExtra & tx = selTrackExtras_->back();
       tx.setResiduals(trk.residuals());

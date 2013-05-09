@@ -201,12 +201,20 @@ void DuplicateListMerger::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 	origSeedRef=edm::RefToBase<TrajectorySeed>( pureRef);
       }//creating a new seed and rekeying it rechit clusters.
       // Fill TrackExtra collection
+      // Use reduced extra format (AA)
+//      outputTrkExtras->push_back( reco::TrackExtra( 
+//               track.outerPosition(), track.outerMomentum(), track.outerOk(),
+//               track.innerPosition(), track.innerMomentum(), track.innerOk(),
+//               track.outerStateCovariance(), track.outerDetId(),
+//               track.innerStateCovariance(), track.innerDetId(),
+//               track.seedDirection(), origSeedRef ) );
       outputTrkExtras->push_back( reco::TrackExtra( 
-						   track.outerPosition(), track.outerMomentum(), track.outerOk(),
-						   track.innerPosition(), track.innerMomentum(), track.innerOk(),
-						   track.outerStateCovariance(), track.outerDetId(),
-						   track.innerStateCovariance(), track.innerDetId(),
-						   track.seedDirection(), origSeedRef ) );
+               track.outerOk(),
+               track.innerOk(),
+               track.outerStateCovariance(), track.outerDetId(),
+               track.innerStateCovariance(), track.innerDetId(),
+               track.seedDirection(), origSeedRef ) );
+               
       seedsRefs[(*matchIter0).first]=origSeedRef;
       out_generalTracks->back().setExtra( reco::TrackExtraRef( refTrkExtras, outputTrkExtras->size() - 1) );
       reco::TrackExtra & tx = outputTrkExtras->back();
@@ -297,12 +305,19 @@ void DuplicateListMerger::produce(edm::Event& iEvent, const edm::EventSetup& iSe
 	}//creating a new seed and rekeying it rechit clusters.
 	
 	// Fill TrackExtra collection
-	outputTrkExtras->push_back( reco::TrackExtra( 
-						     track.outerPosition(), track.outerMomentum(), track.outerOk(),
-						     track.innerPosition(), track.innerMomentum(), track.innerOk(),
-						     track.outerStateCovariance(), track.outerDetId(),
-						     track.innerStateCovariance(), track.innerDetId(),
-						     track.seedDirection(), origSeedRef ) );
+  // Use reduced extra format (AA) 
+//  outputTrkExtras->push_back( reco::TrackExtra( 
+//                 track.outerPosition(), track.outerMomentum(), track.outerOk(),
+//                 track.innerPosition(), track.innerMomentum(), track.innerOk(),
+//                 track.outerStateCovariance(), track.outerDetId(),
+//                 track.innerStateCovariance(), track.innerDetId(),
+//                 track.seedDirection(), origSeedRef ) );
+  outputTrkExtras->push_back( reco::TrackExtra( 
+                 track.outerOk(),
+                 track.innerOk(),
+                 track.outerStateCovariance(), track.outerDetId(),
+                 track.innerStateCovariance(), track.innerDetId(),
+                 track.seedDirection(), origSeedRef ) );
 	seedsRefs[i]=origSeedRef;
 	out_generalTracks->back().setExtra( reco::TrackExtraRef( refTrkExtras, outputTrkExtras->size() - 1) );
 	reco::TrackExtra & tx = outputTrkExtras->back();
